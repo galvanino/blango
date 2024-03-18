@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from configurations import Configuration, values
 import dj_database_url
+from datetime import timedelta
 
 class Dev(Configuration):
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,6 +94,7 @@ class Dev(Configuration):
             "rest_framework.authentication.BasicAuthentication",
             "rest_framework.authentication.SessionAuthentication",
             "rest_framework.authentication.TokenAuthentication",
+            "rest_framework_simplejwt.authentication.JWTAuthentication",
         ],
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticatedOrReadOnly"
@@ -110,11 +112,16 @@ class Dev(Configuration):
             "user_burst": "100/minute",
         },
         "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-        "PAGE_SIZE": 2,
+        "PAGE_SIZE": 100,
         "DEFAULT_FILTER_BACKENDS": [
             "django_filters.rest_framework.DjangoFilterBackend",
             "rest_framework.filters.OrderingFilter",
         ],
+    }
+
+    SIMPLE_JWT = {
+        "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+        "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     }
 
     INTERNAL_IPS = ['192.168.11.179']
