@@ -10,6 +10,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your views here.
+
+def post_table(request):
+    return render(request, "blog/post-table.html")
+
+
 #@cache_page(300)
 #@vary_on_cookie
 def index(request):
