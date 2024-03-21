@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.shortcuts import redirect
+from django.urls import reverse
+
 from blog.models import Post
 from blog.forms import CommentForm
 import logging
@@ -12,7 +14,7 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 
 def post_table(request):
-    return render(request, "blog/post-table.html")
+    return render(request, "blog/post-table.html", {"post_list_url": reverse("post-list")})
 
 
 #@cache_page(300)
